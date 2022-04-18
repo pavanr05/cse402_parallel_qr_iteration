@@ -1,36 +1,82 @@
-#ifndef MATRIX_HPP
-#define MATRIX_HPP
+#ifndef DATA_STRUCTURES_HPP
+#define DATA_STRUCTURES_HPP
 
 #include <iostream>
 
 namespace cse402project{
 
-    struct vector{
-        double *data;
-        int size;
+    class vector{
+
+        public:
+            
+            double *data;
+            int size;
+
+            vector();
+
+            //Construct a vector of size_ initialized with 0.
+            vector(int size_);
+
+            //Copy constructor
+            vector(const vector& other);
+
+            //Assignment operator
+            vector& operator=(const vector& other);
+
+            //Destructor
+            ~vector();
+
+            void print_vector();
+
+            void clear_vector();
+
+            private:
+
+                //Helper to delete vector.
+                void delete_vector();
     };
 
-    struct matrix{
-        double *data;
-        int rows;
-        int cols;
+    class matrix{
+
+        public:
+
+            double **data;
+            int rows;
+            int cols;
+
+            matrix();
+
+            //Construct a matrix with rows_ and cols_ initialized to 0.
+            matrix(int rows_, int cols_);
+
+            //Copy constructor
+            matrix(const matrix& other);
+
+            //Assignment operator
+            matrix& operator=(const matrix& other);
+
+            //Destructor
+            ~matrix();
+
+            void print_matrix();
+
+            //Initialize all elements to 0
+            void clear_matrix();
+
+            private:
+
+                //Helper to create matrix.
+                void create_matrix();
+
+                //Helper to delete matrix.
+                void delete_matrix();
     };
 }
 
-#define ARRAY_ELEMENT(dptr, N, M, i, j) dptr[(i)*(M) + (j)]
-#define MATPTR_ELEMENT(matptr, i, j) ARRAY_ELEMENT(matptr->data, matptr->rows, matptr->cols, i, j)
-#define MATRIX_ELEMENT(matr, i, j) ARRAY_ELEMENT(matr.data, matr.rows, matr.cols, i, j)
-#define MIN(x, y) (((x) < (y)) ? (x) : (y))
-#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define VECPTR_ELEMENT(vecptr,i) vecptr->data[i]
+#define VECTOR_ELEMENT(vec, i) vec.data[i]
 
-bool matrix_create(cse402project::matrix *target, int rows, int cols);
-bool vector_create(cse402project::vector *target, int size);
-
-bool matrix_destroy(cse402project::matrix *target);
-bool vector_destroy(cse402project::vector *target);
-
-bool copy_matrix(cse402project::matrix *target, cse402project::matrix *source);
-bool copy_vector(cse402project::vector *target, cse402project::vector *source);
-
+#define MATPTR_ELEMENT(matptr, i, j) matptr->data[i][j]
+#define MATRIX_ELEMENT(mat, i, j) mat.data[i][j]
 
 #endif

@@ -1,61 +1,157 @@
 #include "data_structures.hpp"
-#include <unistd.h>
+#include <algorithm>
 
 using cse402project::matrix;
 using cse402project::vector;
 
-//Taken from CS 420 MP1.
-bool matrix_create(matrix *target, int rows, int cols){
-    target->rows = rows;
-    target->cols = cols;
+//Vector class
 
-    if(rows==0 || cols==0){
-        target->data = NULL;
-    }
-
-    int memalign_result = posix_memalign(
-            (void**)(&(target->data)),
-            sysconf(_SC_LEVEL1_DCACHE_LINESIZE),
-            sizeof(double)*rows*cols
-    );
-    if(NULL == target->data){
-        target->rows = 0;
-        target->cols = 0;
-        return false;
-    }
-
-    target->rows = rows;
-    target->cols = cols;
-    return true;
+vector::vector(){
+    size = 0;
+    data = NULL;
 }
 
-bool matrix_destroy(matrix *target){
-    free(target->data);
-    target->data = NULL;
-    target->rows = 0;
-    target->cols = 0;
-    return true;
+vector::vector(int size_){
+
+    size = size_;
+    data = new double [size_];
+
+    std::fill_n(data, size_, 0);
 }
 
-bool copy_matrix(matrix *target, matrix *source){
-    if(NULL == target->data || NULL == source->data){
-        return false;
+vector::vector(const vector& other){
+    size = other.size;
+
+    data = new double[size];
+    for(int i = 0; i<size; ++i){
+        data[i] = other.data[i];
     }
-
-    if(target->rows*target->cols != source->rows*source->cols){
-        matrix_destroy(target);
-        bool recreate = matrix_create(target,source->rows, source->cols);
-        if(!recreate)
-            return false;
-    }
-
-    target->rows = source->rows;
-    target->cols = source->cols;
-
-    for(int i = 0;i<source->rows;i++)
-        for(int j = 0;j<source->cols;j++)
-            MATPTR_ELEMENT(target, i, j) = MATPTR_ELEMENT(source, i, j);
-
-    return true;
 }
 
+vector& vector::operator=(const vector& other){
+
+    if(this != &other){
+
+        delete_vector();
+        size = other.size;
+
+        data = new double[size];
+        for(int i = 0; i<size; ++i){
+            data[i] = other.data[i];
+        }
+    }
+    
+    return *this;
+}
+
+vector::~vector(){
+    delete_vector();
+}
+
+void vector::print_vector(){
+    for(int i=0; i < size; ++i){
+        std::cout<<data[i]<<" ";
+    }
+
+    std::cout<<std::endl;
+}
+
+void vector::clear_vector(){
+    std::fill_n(data,size,0);
+}
+
+void vector::delete_vector(){
+
+    size = 0;
+    delete [] data;
+}
+
+//Matrix class
+
+void matrix::create_matrix(){
+    
+    data = new double*[rows];
+    for(int i = 0; i< rows; ++i){
+        data[i] = new double[cols];
+    }
+
+}
+
+void matrix::delete_matrix(){
+    for(int i=0; i<rows; ++i){
+        delete [] data[i];
+    }
+
+    rows = 0;
+    cols = 0;
+}
+
+void matrix::clear_matrix(){
+    for(int i=0; i<rows; ++i){
+        std::fill_n(data[i],cols,0);
+    }
+}
+
+matrix::matrix(){
+    rows = 0;
+    cols = 0;
+    data = NULL;
+}
+
+matrix::matrix(int rows_, int cols_){
+
+    rows = rows_;
+    cols = cols_;
+    create_matrix();
+    clear_matrix();
+}
+
+matrix::matrix(const matrix& other){
+
+    rows = other.rows;
+    cols = other.cols;
+    create_matrix();
+
+    for(int i=0; i<rows; ++i){
+        for(int j=0; j<cols; ++j){
+            data[i][j] = other.data[i][j];
+        }
+    }
+}
+
+matrix& matrix::operator=(const matrix& other){
+    if(this != &other){
+
+        delete_matrix();
+
+        rows = other.rows;
+        cols = other.cols;
+
+        create_matrix();
+
+        for(int i=0; i<rows; ++i){
+            for(int j=0; j<cols; ++j){
+                data[i][j] = other.data[i][j];
+            }
+        }
+    }
+
+    return *this;
+}
+
+matrix::~matrix(){
+    delete_matrix();
+}
+
+void matrix::print_matrix(){
+
+    for(int i=0; i<rows; ++i){
+        for(int j=0; j<cols; ++j){
+            std::cout<<data[i][j]<<" ";
+        }
+
+        std::cout<<std::endl;
+    }
+
+    std::cout<<std::endl;
+}
