@@ -18,8 +18,8 @@ namespace cse402project{
 }
 
 #define ARRAY_ELEMENT(dptr, N, M, i, j) dptr[(i)*(M) + (j)]
-#define MATPTR_ELEMENT(matptr, i, j) ARRAY_ELEMENT(matptr->data, matptr->row, matptr->col, i, j)
-#define MATRIX_ELEMENT(matr, i, j) ARRAY_ELEMENT(matr.data, matr.row, matr.col, i, j)
+#define MATPTR_ELEMENT(matptr, i, j) ARRAY_ELEMENT(matptr->data, matptr->rows, matptr->cols, i, j)
+#define MATRIX_ELEMENT(matr, i, j) ARRAY_ELEMENT(matr.data, matr.rows, matr.cols, i, j)
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 
