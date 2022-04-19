@@ -5,6 +5,18 @@ using cse402project::matrix;
 using cse402project::vector;
 
 //Vector class
+void vector::create_vector(){
+    data = new double[size];
+}
+void vector::clear_vector(){
+    std::fill_n(data,size,0);
+}
+
+void vector::delete_vector(){
+
+    delete [] data;
+    size = 0;
+}
 
 vector::vector(){
     size = 0;
@@ -14,7 +26,7 @@ vector::vector(){
 vector::vector(int size_){
 
     size = size_;
-    data = new double [size_];
+    create_vector();
 
     std::fill_n(data, size_, 0);
 }
@@ -22,7 +34,7 @@ vector::vector(int size_){
 vector::vector(const vector& other){
     size = other.size;
 
-    data = new double[size];
+    create_vector();
     for(int i = 0; i<size; ++i){
         data[i] = other.data[i];
     }
@@ -35,7 +47,7 @@ vector& vector::operator=(const vector& other){
         delete_vector();
         size = other.size;
 
-        data = new double[size];
+        create_vector();
         for(int i = 0; i<size; ++i){
             data[i] = other.data[i];
         }
@@ -54,16 +66,6 @@ void vector::print_vector(){
     }
 
     std::cout<<std::endl;
-}
-
-void vector::clear_vector(){
-    std::fill_n(data,size,0);
-}
-
-void vector::delete_vector(){
-
-    size = 0;
-    delete [] data;
 }
 
 //Matrix class

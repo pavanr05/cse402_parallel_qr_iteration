@@ -32,6 +32,9 @@ namespace cse402project{
 
             private:
 
+                //Helper to creat a vector
+                void create_vector();
+
                 //Helper to delete vector.
                 void delete_vector();
     };
