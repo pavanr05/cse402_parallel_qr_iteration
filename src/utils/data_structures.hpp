@@ -1,7 +1,7 @@
 #ifndef DATA_STRUCTURES_HPP
 #define DATA_STRUCTURES_HPP
 
-#define PRECISION_DIGITS 15
+#define PRECISION_DIGITS 6
 
 #include <iostream>
 

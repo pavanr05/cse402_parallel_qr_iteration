@@ -66,8 +66,9 @@ void vector::print_vector(){
         std::cout<<std::setprecision(PRECISION_DIGITS)<<data[i]<<" ";
     }
 
-    std::cout<<std::endl;
+    std::cout<<std::endl<<std::endl;
 }
+
 
 //Matrix class
 
