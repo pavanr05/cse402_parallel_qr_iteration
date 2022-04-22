@@ -1,5 +1,6 @@
 #include "data_structures.hpp"
 #include <algorithm>
+#include <iomanip>
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -62,7 +63,7 @@ vector::~vector(){
 
 void vector::print_vector(){
     for(int i=0; i < size; ++i){
-        std::cout<<data[i]<<" ";
+        std::cout<<std::setprecision(PRECISION_DIGITS)<<data[i]<<" ";
     }
 
     std::cout<<std::endl;
@@ -149,7 +150,7 @@ void matrix::print_matrix(){
 
     for(int i=0; i<rows; ++i){
         for(int j=0; j<cols; ++j){
-            std::cout<<data[i][j]<<" ";
+            std::cout<<std::setprecision(PRECISION_DIGITS)<<data[i][j]<<" ";
         }
 
         std::cout<<std::endl;

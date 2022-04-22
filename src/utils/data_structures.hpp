@@ -1,6 +1,8 @@
 #ifndef DATA_STRUCTURES_HPP
 #define DATA_STRUCTURES_HPP
 
+#define PRECISION_DIGITS 15
+
 #include <iostream>
 
 namespace cse402project{
@@ -28,15 +30,16 @@ namespace cse402project{
 
             void print_vector();
 
+            //Initialize the vector with 0s.
             void clear_vector();
 
-            private:
+        private:
 
-                //Helper to creat a vector
-                void create_vector();
+            //Helper to creat a vector
+            void create_vector();
 
-                //Helper to delete vector.
-                void delete_vector();
+            //Helper to delete vector.
+            void delete_vector();
     };
 
     class matrix{
@@ -66,13 +69,13 @@ namespace cse402project{
             //Initialize all elements to 0
             void clear_matrix();
 
-            private:
+        private:
 
-                //Helper to create matrix.
-                void create_matrix();
+            //Helper to create matrix.
+            void create_matrix();
 
-                //Helper to delete matrix.
-                void delete_matrix();
+            //Helper to delete matrix.
+            void delete_matrix();
     };
 }
 

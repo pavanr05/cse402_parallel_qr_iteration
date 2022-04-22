@@ -1,5 +1,8 @@
 #include "random_generators.hpp"
 
+using cse402project::matrix;
+using cse402project::vector;
+
 void rand_matrix_generator(matrix *matptr){
     int randdivide = rand()%10000;
     
@@ -28,12 +31,14 @@ void rand_symm_matrix_generator(matrix* matptr){
 
     int randdivide = rand()%10000;
 
+    //First fill lower triangle part.
     for(int i=0; i<matptr->rows; ++i){
         for(int j=0; j<=i; ++j){
             MATPTR_ELEMENT(matptr,i,j) = (double) rand() / (double) randdivide;
         }
     }
 
+    //Fill the upper triangular part using the lower triangle.
     for(int i=0; i<matptr->rows; ++i){
         for(int j=i+1; j<matptr->cols; ++j){
             MATPTR_ELEMENT(matptr,i,j) = MATPTR_ELEMENT(matptr,j,i);
