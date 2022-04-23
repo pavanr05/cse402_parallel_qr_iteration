@@ -15,4 +15,7 @@ void rand_vector_generator(cse402project::vector *vecptr);
 //Random symmetric matrix.
 void rand_symm_matrix_generator(cse402project::matrix *matptr);
 
+//Wall time
+double get_wall_time();
+
 #endif

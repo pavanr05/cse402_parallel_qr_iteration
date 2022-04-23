@@ -1,0 +1,2 @@
+/usr/bin/ar qc libhelpersomp.a CMakeFiles/helpersomp.dir/__/helpers/helpers.cpp.o
+/usr/bin/ranlib libhelpersomp.a

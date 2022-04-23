@@ -1,4 +1,5 @@
-#include "random_generators.hpp"
+#include "utils.hpp"
+#include <sys/time.h>
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -45,4 +46,10 @@ void rand_symm_matrix_generator(matrix* matptr){
         }
     }
 
+}
+
+double get_wall_time() {
+    struct timeval tp;
+    gettimeofday(&tp, NULL);
+    return tp.tv_sec + (tp.tv_usec / 1e6);
 }

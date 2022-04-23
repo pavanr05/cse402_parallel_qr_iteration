@@ -1,0 +1,2 @@
+/usr/bin/ar qc libutilsomp.a CMakeFiles/utilsomp.dir/__/utils/data_structures.cpp.o CMakeFiles/utilsomp.dir/__/utils/utils.cpp.o
+/usr/bin/ranlib libutilsomp.a

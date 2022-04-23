@@ -15,9 +15,12 @@ using cse402project::vector;
 
 int main(int argc, char **argv){
 
-    int n = 4;
+    //omp_set_num_threads(6);
+    int n = 512;
     omp_set_num_threads(6);   
     matrix m1(n,n);
+
+    double s1,t1,s2,t2;
 
     //Test data
     MATRIX_ELEMENT(m1,0,0) = 4;
@@ -37,13 +40,25 @@ int main(int argc, char **argv){
         }
     }
 
-    m1.print_matrix();
-    matrix H(n,n);
+    rand_symm_matrix_generator(&m1);
+    //m1.print_matrix();
+    matrix H1(n,n);
+    matrix H2(n,n);
     //rand_symm_matrix_generator(&m1);
-    householder_serial(&m1,&H);
 
-    m1.print_matrix();
-    H.print_matrix();
-    
+    s1 = omp_get_wtime();
+    householder_serial(&m1,&H1);
+    t1 = omp_get_wtime() - s1;
+
+    s2 = omp_get_wtime();
+    householder_omp(&m1,&H2);
+    t2 = omp_get_wtime() - s2;
+
+    //m1.print_matrix();
+    //H1.print_matrix();
+    //H2.print_matrix();
+
+    std::cout<<t1<<std::endl;
+    std::cout<<t2<<std::endl;
     return 0;
 }

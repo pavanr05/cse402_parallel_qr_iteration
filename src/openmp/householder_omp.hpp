@@ -2,6 +2,7 @@
 #define HOUSEHOLDER_OMP_HPP
 
 #include "../utils/data_structures.hpp"
+#include "../helpers/helpers.hpp"
 #include <cmath>
 #include <omp.h>
 
@@ -13,5 +14,7 @@ double vec_l2norm_omp(cse402project::vector* vecptr);
 void identity_matrix_omp(cse402project::matrix*matptr);
 
 void matmul_tiled_omp(cse402project::matrix* A, cse402project::matrix* B, cse402project::matrix* res, int tilesize);
+
+void householder_omp(cse402project::matrix* Aptr, cse402project::matrix* Hptr);
 
 #endif

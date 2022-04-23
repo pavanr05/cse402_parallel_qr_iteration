@@ -1,7 +1,5 @@
 #include "householder.hpp"
-#include "../helpers/helpers.hpp"
-
-#define TILE_SIZE 2
+#define TILE_SIZE 8
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -104,11 +102,6 @@ void householder_serial(matrix* Aptr, matrix* Hptr){
                 MATRIX_ELEMENT(P,i,j) = MATRIX_ELEMENT(I,i,j) - 2*VECTOR_ELEMENT(v,i)*VECTOR_ELEMENT(v,j);
             }
         }
-
-        colVec.print_vector();
-        v.print_vector();
-
-        P.print_matrix();
 
         matmul_tiled(&P,&Ak,&temp,TILE_SIZE);
         matmul_tiled(&temp, &P, &Ak, TILE_SIZE);

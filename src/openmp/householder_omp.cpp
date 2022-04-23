@@ -1,5 +1,5 @@
 #include "householder_omp.hpp"
-#include "../helpers/helpers.hpp"
+#define TILE_SIZE 8
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -27,6 +27,7 @@ void identity_matrix_omp(matrix* matptr){
         exit(1);
     }
 
+    matptr->clear_matrix();
     int i;
     #pragma omp parallel for 
     for(i = 0; i<matptr->rows; ++i){
@@ -62,4 +63,60 @@ void matmul_tiled_omp(matrix* Aptr, matrix* Bptr, matrix* resptr, int tilesize){
             }
         }
     }
+}
+
+void householder_omp(matrix* Aptr, matrix* Hptr){
+
+    double alpha, r;
+    vector v(Aptr->rows);
+    vector colVec(Aptr->rows);
+    
+    matrix P(Aptr->rows, Aptr->cols);
+
+    //Identity matrix
+    matrix I(Aptr->rows, Aptr->cols);
+    identity_matrix_omp(&I);
+
+    matrix temp(Aptr->rows, Aptr->cols);
+
+    matrix Ak(*Aptr);
+
+    //This loop cannot be parallelized because of the dependency of the Ak matrix from previous iteration.
+    for(int k = 0; k < Aptr->cols-2; ++k){
+
+        identity_matrix_omp(&P);
+
+        std::fill_n(colVec.data, k+1, 0);
+
+        #pragma omp parallel for
+        for(int j = k+1; j < colVec.size; ++j){
+            VECTOR_ELEMENT(colVec,j) = MATRIX_ELEMENT(Ak,j,k);
+        }
+        
+        alpha = (double) -sgn(VECTOR_ELEMENT(colVec,k+1))*vec_l2norm_omp(&colVec);
+
+        r = sqrt(0.5*alpha*alpha - 0.5*VECTOR_ELEMENT(colVec,k+1)*alpha);
+
+        std::fill_n(v.data,k+1,0);
+
+        VECTOR_ELEMENT(v,k+1) = 0.5*(VECTOR_ELEMENT(colVec,k+1) - alpha)/r;
+
+        #pragma omp parallel for
+        for(int j = k+2; j < Aptr->rows; ++j){
+            VECTOR_ELEMENT(v,j) = 0.5*VECTOR_ELEMENT(colVec,j)/r;
+        }
+
+        #pragma omp parallel for
+        for(int i=k+1; i < Aptr->rows; ++i){
+            for(int j = k+1; j < Aptr->rows; ++j){
+                MATRIX_ELEMENT(P,i,j) = MATRIX_ELEMENT(I,i,j) - 2*VECTOR_ELEMENT(v,i)*VECTOR_ELEMENT(v,j);
+            }
+        }
+
+        matmul_tiled_omp(&P,&Ak,&temp,TILE_SIZE);
+        matmul_tiled_omp(&temp, &P, &Ak, TILE_SIZE);
+    }
+
+    *Hptr = Ak;
+
 }

@@ -2,6 +2,7 @@
 #define HOUSEHOLDER_HPP
 
 #include "../utils/data_structures.hpp"
+#include "../helpers/helpers.hpp"
 #include <cmath>
 
 
