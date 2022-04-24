@@ -1,1 +1,0 @@
-g++ CMakeFiles/serial.dir/main_serial.cpp.o CMakeFiles/serial.dir/householder.cpp.o -o serial  libutils.a libhelpers.a 

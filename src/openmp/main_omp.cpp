@@ -2,18 +2,22 @@
 #include "../utils/data_structures.hpp"
 #include "../utils/utils.hpp"
 #include <stdlib.h>
+#include <omp.h>
 
 using cse402project::matrix;
 using cse402project::vector;
 
 int main(int argc, char **argv){
 
-    if(argc<2){
-        std::cout<<"Enter the matrix size!"<<std::endl;
+    if(argc<3){
+        std::cout<<"Enter the matrix size and number of threads!"<<std::endl;
         exit(1);
     }
 
     int matrixSize = atoi(argv[1]);
+    int numThreads = atoi(argv[2]);
+
+    omp_set_num_threads(numThreads);
     
     matrix m1(matrixSize,matrixSize);
     matrix H1(matrixSize,matrixSize);

@@ -1,1 +1,0 @@
-g++ CMakeFiles/eigen_omp.dir/main_omp.cpp.o CMakeFiles/eigen_omp.dir/householder_omp.cpp.o -o eigen_omp  libutilsomp.a libhelpersomp.a /usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so /usr/lib/x86_64-linux-gnu/libpthread.so 
