@@ -6,6 +6,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 project(eigen_parallel)
 
+add_compile_options(-Wall -O3 -g)
+
 add_subdirectory(src/serial)
 add_subdirectory(src/openmp)
 
