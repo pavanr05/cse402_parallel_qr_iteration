@@ -60,6 +60,12 @@ void matmul_tiled(matrix* Aptr, matrix* Bptr, matrix* resptr, int tilesize){
     }
 }
 
+void transpose_tiled(matrix* Aptr, int tilesize){
+    int ii,jj,i,j;
+
+
+}
+
 void householder_serial(matrix* Aptr, matrix* Hptr){
 
     double alpha, r;

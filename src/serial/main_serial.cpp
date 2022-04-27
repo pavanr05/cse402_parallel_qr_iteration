@@ -1,4 +1,5 @@
 #include "householder.hpp"
+#include "qr_eigen.hpp"
 #include "../utils/data_structures.hpp"
 #include "../utils/utils.hpp"
 #include <stdlib.h>
@@ -18,15 +19,35 @@ int main(int argc, char **argv){
     matrix m1(matrixSize,matrixSize);
     matrix H1(matrixSize,matrixSize);
 
-    rand_symm_matrix_generator(&m1);
+    matrix Q(matrixSize, matrixSize);
+    matrix R(matrixSize, matrixSize);
 
+    vector eigen_vals(matrixSize);
+
+    rand_symm_matrix_generator(&m1);
+    /*
+    MATRIX_ELEMENT(H1,0,0) = 3;
+    MATRIX_ELEMENT(H1,1,1) = 3;
+    MATRIX_ELEMENT(H1,2,2) = 3;
+
+    MATRIX_ELEMENT(H1,0,1) = 1;
+    MATRIX_ELEMENT(H1,1,0) = 1;
+
+    MATRIX_ELEMENT(H1,1,2) = 1;
+    MATRIX_ELEMENT(H1,2,1) = 1;
+    */
     double start,exec_time;
 
     start = get_wall_time();
     householder_serial(&m1, &H1);
+    qr_iteration(&H1, &eigen_vals);
     exec_time = get_wall_time() - start;
 
+    eigen_vals.print_vector();
+
     std::cout<<"The serial version took "<<exec_time<<" s."<<std::endl;
+
+    
 
 
     return 0;

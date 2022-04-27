@@ -14,6 +14,8 @@ void identity_matrix_serial(cse402project::matrix* matptr);
 
 void matmul_tiled(cse402project::matrix* Aptr, cse402project::matrix* Bptr, cse402project::matrix* resptr, int tilesize);
 
+void transpose_tiled(cse402project::matrix* Aptr, int tilesize);
+
 void householder_serial(cse402project::matrix* Aptr, cse402project::matrix* Hptr);
 
 #endif

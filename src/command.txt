@@ -1,1 +1,0 @@
- g++ -fopenmp -o main main.cpp utils/data_structures.cpp utils/random_generators.cpp serial/householder.cpp openmp/householder_omp.cpp helpers/helpers.cpp
