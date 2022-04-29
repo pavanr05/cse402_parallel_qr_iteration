@@ -43,9 +43,9 @@ int main(int argc, char **argv){
     qr_iteration(&H1, &eigen_vals);
     exec_time = get_wall_time() - start;
 
-    eigen_vals.print_vector();
+    //eigen_vals.print_vector();
 
-    std::cout<<"The serial version took "<<exec_time<<" s."<<std::endl;
+    std::cout<<"The serial version took "<<exec_time<<"s for a matrix of size "<<matrixSize<<"."<<std::endl;
 
     
 
