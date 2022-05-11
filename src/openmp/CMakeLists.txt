@@ -8,4 +8,4 @@ if(OpenMP_CXX_FOUND)
     target_link_libraries(eigen_omp PUBLIC utils OpenMP::OpenMP_CXX)
 endif()
 
-target_compile_options(eigen_omp PUBLIC -qopenmp)
+target_compile_options(eigen_omp PUBLIC -fopenmp)

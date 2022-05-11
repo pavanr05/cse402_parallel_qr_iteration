@@ -5,7 +5,7 @@
 
 #define TILE_SIZE 8
 #define rel_tol 1e-1
-#define MAX_ITER 200
+#define MAX_ITER 50
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -48,9 +48,16 @@ void qr_factorization_tridiagonal_omp(matrix* A, matrix* Q, matrix* R){
         MATRIX_ELEMENT(Gi_T,i+1,i) = -s;
         MATRIX_ELEMENT(Gi_T,i+1,i+1) = c;
 
+        //#pragma omp parallel sections
+        //{
+        
+        //#pragma omp section
         matmul_tiled_omp(&Gi, &Ai, &temp, TILE_SIZE);
-
+        
+        //#pragma omp section
         matmul_tiled_omp(Q,&Gi_T,&tempQ, TILE_SIZE);
+
+        //}
 
         Ai = temp;
         *Q = tempQ;
