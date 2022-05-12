@@ -22,7 +22,7 @@ int main(int argc, char **argv){
     int numThreads;
 
     if(argc==3){
-        int numThreads = atoi(argv[2]);
+        numThreads = atoi(argv[2]);
     }else if(argc==2){
         numThreads = num_cores/2;
     }else{
