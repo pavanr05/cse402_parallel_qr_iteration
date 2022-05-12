@@ -2,7 +2,7 @@
 #SBATCH --time=04:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=16
-#SBATCH --job-name="project-omp"
+#SBATCH --job-name="project-omp-ss"
 #SBATCH --output=omp_benchmark_ss.%J.out
 #SBATCH --error=omp_benchmark_ss.%J.err
 #SBATCH -p secondary-fdr
