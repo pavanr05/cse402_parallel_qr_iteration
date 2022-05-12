@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
-set(CMAKE_C_COMPILER mpicc)
 set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_COMPILER mpicxx)
 set(CMAKE_CXX_STANDARD 11)
 
-project(eigen_parallel)
+project(eigen_parallel LANGUAGES CXX)
 
 add_compile_options(-Wall -O3 -g)
 
