@@ -16,6 +16,15 @@ include_directories(src/helpers src/utils)
 add_subdirectory(src/serial)
 add_subdirectory(src/openmp)
 
-if((CMAKE_CXX_COMPILER STREQUAL "mpiicpc") OR (CMAKE_CXX_COMPILER STREQUAL "mpicxx") OR (CMAKE_CXX_COMPILER STREQUAL "mpic++"))
+string(FIND "${CMAKE_CXX_COMPILER}" "mpiicpc" MPIICPC)
+string(FIND "${CMAKE_CXX_COMPILER}" "mpicxx" MPICXX)
+string(FIND "${CMAKE_CXX_COMPILER}" "mpic++" MPICPP)
+
+math(EXPR MPIICPC_INT ${MPIICPC})
+math(EXPR MPICXX_INT ${MPICXX}) 
+math(EXPR MPICPP_INT ${MPICPP})
+
+
+if((MPIICPC_INT GREATER_EQUAL 0) OR (MPICXX_INT GREATER_EQUAL 0) OR (MPICPP_INT GREATER_EQUAL 0))
     add_subdirectory(src/mpi)
 endif()
