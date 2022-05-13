@@ -5,7 +5,7 @@
 #SBATCH --job-name="project-omp"
 #SBATCH --output=omp_benchmark.%J.out
 #SBATCH --error=omp_benchmark.%J.err
-#SBATCH -p secondary-fdr
+#SBATCH -p secondary
 
 
 module load intel/18.0
@@ -27,8 +27,8 @@ cd build
 cmake -DCMAKE_CXX_COMPILER=g++ ../
 cmake --build . --target eigen_omp
 
-sizes=(16 32 64 128 256 512)
-n_omp_sizes=5
+sizes=(16 32 64 128 256 512 1024)
+n_omp_sizes=6
 
 for i in $(seq 0 $n_omp_sizes)
 do

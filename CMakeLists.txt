@@ -15,4 +15,7 @@ include_directories(src/helpers src/utils)
 
 add_subdirectory(src/serial)
 add_subdirectory(src/openmp)
-add_subdirectory(src/mpi)
+
+if((CMAKE_CXX_COMPILER STREQUAL "mpiicpc") OR (CMAKE_CXX_COMPILER STREQUAL "mpicxx") OR (CMAKE_CXX_COMPILER STREQUAL "mpic++"))
+    add_subdirectory(src/mpi)
+endif()
