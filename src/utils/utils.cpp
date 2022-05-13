@@ -5,7 +5,7 @@ using cse402project::matrix;
 using cse402project::vector;
 
 void rand_matrix_generator(matrix *matptr){
-    int randdivide = rand()%10000;
+    int randdivide = rand()%10000000;
     
     for(int i=0; i<matptr->rows; ++i){
         for(int j=0; j<matptr->cols; ++j){
@@ -15,7 +15,7 @@ void rand_matrix_generator(matrix *matptr){
 }
 
 void rand_vector_generator(vector* vecptr){
-    int randdivide = rand()%10000;
+    int randdivide = rand()%1000000;
 
     for(int i=0; i<vecptr->size; ++i){
         VECPTR_ELEMENT(vecptr,i) = (double) rand() / (double) randdivide;
@@ -30,7 +30,7 @@ void rand_symm_matrix_generator(matrix* matptr){
         exit(1);
     }
 
-    int randdivide = rand()%10000;
+    int randdivide = rand()%10000000;
 
     //First fill lower triangle part.
     for(int i=0; i<matptr->rows; ++i){

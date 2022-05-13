@@ -74,26 +74,20 @@ void vector::print_vector(){
 
 void matrix::create_matrix(){
     
-    data = new double*[rows];
-    for(int i = 0; i< rows; ++i){
-        data[i] = new double[cols];
-    }
+    data = new double[rows*cols];
 
 }
 
 void matrix::delete_matrix(){
-    for(int i=0; i<rows; ++i){
-        delete [] data[i];
-    }
-
+    
+    delete [] data;
     rows = 0;
     cols = 0;
 }
 
 void matrix::clear_matrix(){
-    for(int i=0; i<rows; ++i){
-        std::fill_n(data[i],cols,0);
-    }
+    
+    std::fill_n(data,rows*cols,0);
 }
 
 matrix::matrix(){
@@ -116,10 +110,8 @@ matrix::matrix(const matrix& other){
     cols = other.cols;
     create_matrix();
 
-    for(int i=0; i<rows; ++i){
-        for(int j=0; j<cols; ++j){
-            data[i][j] = other.data[i][j];
-        }
+    for(int i=0; i<rows*cols; ++i){
+        data[i] = other.data[i];
     }
 }
 
@@ -133,10 +125,10 @@ matrix& matrix::operator=(const matrix& other){
 
         create_matrix();
 
-        for(int i=0; i<rows; ++i){
-            for(int j=0; j<cols; ++j){
-                data[i][j] = other.data[i][j];
-            }
+        for(int i=0; i<rows*cols; ++i){
+            
+            data[i] = other.data[i];
+            
         }
     }
 
@@ -151,7 +143,7 @@ void matrix::print_matrix(){
 
     for(int i=0; i<rows; ++i){
         for(int j=0; j<cols; ++j){
-            std::cout<<std::setprecision(PRECISION_DIGITS)<<data[i][j]<<" ";
+            std::cout<<std::setprecision(PRECISION_DIGITS)<<data[j + cols*i]<<" ";
         }
 
         std::cout<<std::endl;

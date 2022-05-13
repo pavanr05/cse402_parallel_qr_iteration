@@ -3,9 +3,8 @@
 #include <cmath>
 #include <float.h>
 
-#define TILE_SIZE 8
 #define rel_tol 1e-1
-#define MAX_ITER 50
+#define MAX_ITER 25
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -52,10 +51,10 @@ void qr_factorization_tridiagonal_omp(matrix* A, matrix* Q, matrix* R){
         //{
         
         //#pragma omp section
-        matmul_tiled_omp(&Gi, &Ai, &temp, TILE_SIZE);
+        matmul_omp(&Gi, &Ai, &temp);
         
         //#pragma omp section
-        matmul_tiled_omp(Q,&Gi_T,&tempQ, TILE_SIZE);
+        matmul_omp(Q,&Gi_T,&tempQ);
 
         //}
 
@@ -66,21 +65,6 @@ void qr_factorization_tridiagonal_omp(matrix* A, matrix* Q, matrix* R){
     *R = Ai;
 }
 
-void matmul_omp(matrix* A, matrix* B, matrix* res){
-
-    double Aik;
-
-    #pragma omp parallel for private(Aik)
-    for(int i = 0; i < A->rows; ++i){
-        for(int k = 0; k < A->cols; ++k){
-
-            Aik = MATPTR_ELEMENT(A,i,k);
-            for(int j = 0; j < B->cols; ++j){
-                MATPTR_ELEMENT(res,i,j) += Aik*MATPTR_ELEMENT(B,k,j);
-            }
-        }
-    }
-}
 
 void qr_iteration_omp(matrix* A, vector* eigen_vals){
 
@@ -103,7 +87,7 @@ void qr_iteration_omp(matrix* A, vector* eigen_vals){
         //std::cout<<numIters<<std::endl;
 
         qr_factorization_tridiagonal_omp(&Ai, &Q, &R);
-        matmul_tiled_omp(&R,&Q,&Ai,TILE_SIZE);
+        matmul_omp(&R,&Q,&Ai);
 
         /*
         #pragma omp parallel for

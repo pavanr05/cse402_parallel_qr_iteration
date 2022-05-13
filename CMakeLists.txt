@@ -15,4 +15,4 @@ include_directories(src/helpers src/utils)
 
 add_subdirectory(src/serial)
 add_subdirectory(src/openmp)
-
+add_subdirectory(src/mpi)

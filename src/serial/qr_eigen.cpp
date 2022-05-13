@@ -3,9 +3,8 @@
 #include <cmath>
 #include <float.h>
 
-#define TILE_SIZE 8
 #define rel_tol 1e-1
-#define MAX_ITER 200
+#define MAX_ITER 25
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -47,31 +46,18 @@ void qr_factorization_tridiagonal(matrix* A, matrix* Q, matrix* R){
         MATRIX_ELEMENT(Gi_T,i+1,i) = -s;
         MATRIX_ELEMENT(Gi_T,i+1,i+1) = c;
 
-        matmul_tiled(&Gi, &Ai, &temp, TILE_SIZE);
+        matmul_serial(&Gi, &Ai, &temp);
 
-        matmul_tiled(Q,&Gi_T,&tempQ, TILE_SIZE);
+        matmul_serial(Q,&Gi_T,&tempQ);
 
         Ai = temp;
         *Q = tempQ;
+
     }
 
     *R = Ai;
 }
 
-void matmul(matrix* A, matrix* B, matrix* res){
-
-    double Aik;
-
-    for(int i = 0; i < A->rows; ++i){
-        for(int k = 0; k < A->cols; ++k){
-
-            Aik = MATPTR_ELEMENT(A,i,k);
-            for(int j = 0; j < B->cols; ++j){
-                MATPTR_ELEMENT(res,i,j) += Aik*MATPTR_ELEMENT(B,k,j);
-            }
-        }
-    }
-}
 
 void qr_iteration(matrix* A, vector* eigen_vals){
 
@@ -92,7 +78,7 @@ void qr_iteration(matrix* A, vector* eigen_vals){
     while(numIters<MAX_ITER){
 
         qr_factorization_tridiagonal(&Ai, &Q, &R);
-        matmul_tiled(&R,&Q,&Ai,TILE_SIZE);
+        matmul_serial(&R,&Q,&Ai);
 
         /*
         for(int i = 0; i<Ai.rows; ++i){

@@ -1,5 +1,0 @@
-#ifndef HOUSEHOLDER_MPI_HPP
-#define HOUSEHOLDER_MPI_HPP
-
-
-#endif

@@ -1,5 +1,4 @@
 #include "householder.hpp"
-#define TILE_SIZE 8
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -33,38 +32,25 @@ void identity_matrix_serial(matrix* matptr){
     }
 }
 
-void matmul_tiled(matrix* Aptr, matrix* Bptr, matrix* resptr, int tilesize){
-    int i,j,k;
-    int ii,jj,kk;
-
+void matmul_serial(matrix* Aptr, matrix* Bptr, matrix* resptr){
+    
     //A temporary variable.
     double Aik;
 
     resptr->clear_matrix();
 
-    for(kk=0; kk<Aptr->cols; kk+=tilesize){
-        for(ii = 0; ii < Aptr->rows; ii+=tilesize){
-            for(jj = 0; jj < Bptr->cols; jj+=tilesize){
-                for(k = kk; k<kk+tilesize; ++k){
-                    for(i = ii; i < ii + tilesize; ++i){
-
-                        Aik = MATPTR_ELEMENT(Aptr,i,k);
-                        for(j = jj; j < jj+tilesize; ++j){
-                            MATPTR_ELEMENT(resptr,i,j) += Aik*MATPTR_ELEMENT(Bptr,k,j);
-                        }
-
-                    }
-                }
+    for(int k = 0; k<Aptr->cols; ++k){
+        for(int i = 0; i < Aptr->rows; ++i){
+            Aik = MATPTR_ELEMENT(Aptr,i,k);
+            for(int j=0; j < Bptr->cols; ++j){
+                MATPTR_ELEMENT(resptr,i,j) += Aik*MATPTR_ELEMENT(Bptr,k,j);
             }
         }
     }
+
+    
 }
 
-void transpose_tiled(matrix* Aptr, int tilesize){
-    int ii,jj,i,j;
-
-
-}
 
 void householder_serial(matrix* Aptr, matrix* Hptr){
 
@@ -109,8 +95,8 @@ void householder_serial(matrix* Aptr, matrix* Hptr){
             }
         }
 
-        matmul_tiled(&P,&Ak,&temp,TILE_SIZE);
-        matmul_tiled(&temp, &P, &Ak, TILE_SIZE);
+        matmul_serial(&P,&Ak,&temp);
+        matmul_serial(&temp, &P, &Ak);
     }
 
     *Hptr = Ak;

@@ -25,6 +25,7 @@ int main(int argc, char **argv){
     vector eigen_vals(matrixSize);
 
     rand_symm_matrix_generator(&m1);
+
     /*
     MATRIX_ELEMENT(H1,0,0) = 3;
     MATRIX_ELEMENT(H1,1,1) = 3;
@@ -36,6 +37,7 @@ int main(int argc, char **argv){
     MATRIX_ELEMENT(H1,1,2) = 1;
     MATRIX_ELEMENT(H1,2,1) = 1;
     */
+
     double start,exec_time;
 
     start = get_wall_time();
@@ -43,7 +45,9 @@ int main(int argc, char **argv){
     qr_iteration(&H1, &eigen_vals);
     exec_time = get_wall_time() - start;
 
+    //H1.print_matrix();
     //eigen_vals.print_vector();
+    
 
     std::cout<<"The serial version took "<<exec_time<<"s for a matrix of size "<<matrixSize<<"."<<std::endl;
 

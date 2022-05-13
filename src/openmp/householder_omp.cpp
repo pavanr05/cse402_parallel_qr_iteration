@@ -1,5 +1,4 @@
 #include "householder_omp.hpp"
-#define TILE_SIZE 8
 
 using cse402project::matrix;
 using cse402project::vector;
@@ -36,30 +35,20 @@ void identity_matrix_omp(matrix* matptr){
 
 }
 
-void matmul_tiled_omp(matrix* Aptr, matrix* Bptr, matrix* resptr, int tilesize){
-    int i,j,k;
-    int ii,jj,kk;
-
-    //A temporary variable.
+void matmul_omp(matrix* A, matrix* B, matrix* res){
     double Aik;
 
-    resptr->clear_matrix();
+    int i,j,k;
 
-    #pragma omp parallel for private(kk,jj,i,j,k, Aik)
-    for(ii=0; ii<Aptr->rows; ii+=tilesize){
-        for(kk = 0; kk < Aptr->cols; kk+=tilesize){
-            for(jj = 0; jj < Bptr->cols; jj+=tilesize){
+    res->clear_matrix();
 
-                for(i = ii; i<ii+tilesize; ++i){
-                    for(k = kk; k < kk + tilesize; ++k){
+    #pragma omp parallel for private(j,k,Aik)
+    for(i = 0; i < A->rows; ++i){
+        for(k = 0; k < A->cols; ++k){
 
-                        Aik = MATPTR_ELEMENT(Aptr,i,k);
-                        for(j = jj; j < jj+tilesize; ++j){
-                            MATPTR_ELEMENT(resptr,i,j) += Aik*MATPTR_ELEMENT(Bptr,k,j);
-                        }
-
-                    }
-                }
+            Aik = MATPTR_ELEMENT(A,i,k);
+            for(j = 0; j < B->cols; ++j){
+                MATPTR_ELEMENT(res,i,j) += Aik*MATPTR_ELEMENT(B,k,j);
             }
         }
     }
@@ -113,8 +102,8 @@ void householder_omp(matrix* Aptr, matrix* Hptr){
             }
         }
 
-        matmul_tiled_omp(&P,&Ak,&temp,TILE_SIZE);
-        matmul_tiled_omp(&temp, &P, &Ak, TILE_SIZE);
+        matmul_omp(&P,&Ak,&temp);
+        matmul_omp(&temp, &P, &Ak);
     }
 
     *Hptr = Ak;

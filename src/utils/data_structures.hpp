@@ -46,7 +46,7 @@ namespace cse402project{
 
         public:
 
-            double **data;
+            double *data;
             int rows;
             int cols;
 
@@ -82,7 +82,7 @@ namespace cse402project{
 #define VECPTR_ELEMENT(vecptr,i) vecptr->data[i]
 #define VECTOR_ELEMENT(vec, i) vec.data[i]
 
-#define MATPTR_ELEMENT(matptr, i, j) matptr->data[i][j]
-#define MATRIX_ELEMENT(mat, i, j) mat.data[i][j]
+#define MATPTR_ELEMENT(matptr, i, j) matptr->data[(j) + (matptr->cols)*(i)]
+#define MATRIX_ELEMENT(mat, i, j) mat.data[(j) + (mat.cols)*(i)]
 
 #endif
