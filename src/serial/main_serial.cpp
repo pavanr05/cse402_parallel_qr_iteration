@@ -46,6 +46,7 @@ int main(int argc, char **argv){
     exec_time = get_wall_time() - start;
 
     //H1.print_matrix();
+    //m1.print_matrix();
     //eigen_vals.print_vector();
     
 
