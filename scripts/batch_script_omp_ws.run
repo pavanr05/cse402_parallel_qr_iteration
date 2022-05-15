@@ -1,0 +1,35 @@
+#!/bin/bash
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=16
+#SBATCH --job-name="project-omp-ws"
+#SBATCH --output=omp_benchmark_ws.%J.out
+#SBATCH --error=omp_benchmark_ws.%J.err
+#SBATCH -p secondary
+
+module load gcc/7.2.0
+module load intel/18.0
+module load cmake/3.18.4
+
+
+#check that the script was submit from the right place.
+if [ -d "./src" ] && [ -d "./scripts" ] 
+then
+        echo "We seem to be in the right place."
+else
+        echo "Not submit from the right place! Submit from the root of your repository."
+        exit 1
+fi
+
+mkdir -p build
+cd build
+cmake -DCMAKE_CXX_COMPILER=g++ ../
+cmake --build . --target eigen_omp
+
+./src/openmp/eigen_omp 128 1
+
+./src/openmp/eigen_omp 256 4
+
+./src/openmp/eigen_omp 512 16
+
+

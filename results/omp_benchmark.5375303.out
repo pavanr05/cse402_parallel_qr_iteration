@@ -1,0 +1,18 @@
+We seem to be in the right place.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+[ 22%] Built target helpers
+[ 55%] Built target utils
+Scanning dependencies of target eigen_omp
+[ 66%] Building CXX object src/openmp/CMakeFiles/eigen_omp.dir/main_omp.cpp.o
+[ 77%] Building CXX object src/openmp/CMakeFiles/eigen_omp.dir/householder_omp.cpp.o
+[ 88%] Building CXX object src/openmp/CMakeFiles/eigen_omp.dir/qr_eigen_omp.cpp.o
+[100%] Linking CXX executable eigen_omp
+[100%] Built target eigen_omp
+The OpenMP version with 20 threads took 0.108697s for a matrix of size 16.
+The OpenMP version with 20 threads took 0.225223s for a matrix of size 32.
+The OpenMP version with 20 threads took 0.472626s for a matrix of size 64.
+The OpenMP version with 20 threads took 1.54925s for a matrix of size 128.
+The OpenMP version with 20 threads took 11.5782s for a matrix of size 256.
+The OpenMP version with 20 threads took 170.722s for a matrix of size 512.

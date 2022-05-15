@@ -1,0 +1,10 @@
+/home/pavanr2/cse402_project/src/serial/qr_eigen.cpp: In function ‘void qr_iteration(cse402project::matrix*, cse402project::vector*)’:
+/home/pavanr2/cse402_project/src/serial/qr_eigen.cpp:69:12: warning: unused variable ‘rel_err’ [-Wunused-variable]
+     double rel_err = DBL_MAX;
+            ^~~~~~~
+/home/pavanr2/cse402_project/src/serial/qr_eigen.cpp:70:12: warning: unused variable ‘err_vec_norm’ [-Wunused-variable]
+     double err_vec_norm;
+            ^~~~~~~~~~~~
+/home/pavanr2/cse402_project/src/serial/qr_eigen.cpp:71:12: warning: unused variable ‘v_prev_norm’ [-Wunused-variable]
+     double v_prev_norm;
+            ^~~~~~~~~~~

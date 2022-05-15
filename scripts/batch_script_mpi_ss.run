@@ -1,0 +1,38 @@
+#!/bin/bash
+#SBATCH --time=04:00:00
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=16
+#SBATCH --job-name="project-mpi"
+#SBATCH --output=mpi_benchmark_node.%J.out
+#SBATCH --error=mpi_benchmark_node.%J.err
+#SBATCH -p secondary
+
+module load gcc/7.2.0
+module load openmpi/4.1.0-gcc-7.2.0
+module load openmpi/4.1.0-gcc-7.2.0-pmi2
+module load cmake/3.18.4
+
+
+#check that the script was submit from the right place.
+if [ -d "./src" ] && [ -d "./scripts" ] 
+then
+        echo "We seem to be in the right place."
+else
+        echo "Not submit from the right place! Submit from the root of your repository."
+        exit 1
+fi
+
+mkdir -p build
+cd build
+cmake -DCMAKE_CXX_COMPILER=mpicxx ../
+cmake --build . --target eigen_mpi
+
+cores=(1 2 4 8 16)
+num_cores=5
+
+for i in $(seq 0 ${num_cores})
+do
+    mpirun -np ${cores[$i]} ./src/mpi/eigen_mpi 512
+done
+
+

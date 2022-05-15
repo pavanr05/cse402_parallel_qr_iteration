@@ -1,0 +1,9 @@
+We seem to be in the right place.
+-- /usr/local/mpi/rh7/openmpi/4.1.0/gcc/7.2.0/pmi2/bin/mpicxx
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+[ 22%] Built target helpers
+[ 55%] Built target utils
+[100%] Built target eigen_mpi
+The MPI version with 64 processes ran for 7084.39 s for a matrix size 512

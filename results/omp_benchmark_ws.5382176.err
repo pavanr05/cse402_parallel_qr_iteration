@@ -1,0 +1,10 @@
+/home/pavanr2/cse402_project/src/openmp/qr_eigen_omp.cpp: In function ‘void qr_iteration_omp(cse402project::matrix*, cse402project::vector*)’:
+/home/pavanr2/cse402_project/src/openmp/qr_eigen_omp.cpp:76:12: warning: unused variable ‘rel_err’ [-Wunused-variable]
+     double rel_err = DBL_MAX;
+            ^~~~~~~
+/home/pavanr2/cse402_project/src/openmp/qr_eigen_omp.cpp:77:12: warning: unused variable ‘err_vec_norm’ [-Wunused-variable]
+     double err_vec_norm;
+            ^~~~~~~~~~~~
+/home/pavanr2/cse402_project/src/openmp/qr_eigen_omp.cpp:78:12: warning: unused variable ‘v_prev_norm’ [-Wunused-variable]
+     double v_prev_norm;
+            ^~~~~~~~~~~

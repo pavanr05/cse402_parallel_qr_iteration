@@ -1,0 +1,39 @@
+We seem to be in the right place.
+-- /usr/local/mpi/rh7/openmpi/4.1.0/gcc/7.2.0/pmi2/bin/mpicxx
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+[ 22%] Built target helpers
+[ 55%] Built target utils
+[100%] Built target eigen_mpi
+The MPI version with 16 processes ran for 0.0151141 s for a matrix size 16
+The MPI version with 16 processes ran for 0.092443 s for a matrix size 32
+The MPI version with 16 processes ran for 0.352974 s for a matrix size 64
+The MPI version with 16 processes ran for 2.79907 s for a matrix size 128
+The MPI version with 16 processes ran for 22.825 s for a matrix size 256
+The MPI version with 16 processes ran for 218.502 s for a matrix size 512
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+Enter the matrix size
+------------------------------------------------------------
+A process or daemon was unable to complete a TCP connection
+to another process:
+  Local host:    ccc0107
+  Remote host:   ccc0108
+This is usually caused by a firewall on the remote host. Please
+check that any firewall (e.g., iptables) has been disabled and
+try again.
+------------------------------------------------------------

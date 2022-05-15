@@ -1,0 +1,31 @@
+We seem to be in the right place.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+Scanning dependencies of target helpers
+[ 11%] Building CXX object CMakeFiles/helpers.dir/src/helpers/helpers.cpp.o
+[ 22%] Linking CXX static library libhelpers.a
+[ 22%] Built target helpers
+Scanning dependencies of target utils
+[ 33%] Building CXX object CMakeFiles/utils.dir/src/utils/data_structures.cpp.o
+[ 44%] Building CXX object CMakeFiles/utils.dir/src/utils/utils.cpp.o
+[ 55%] Linking CXX static library libutils.a
+[ 55%] Built target utils
+Scanning dependencies of target eigen_serial
+[ 66%] Building CXX object src/serial/CMakeFiles/eigen_serial.dir/main_serial.cpp.o
+[ 77%] Building CXX object src/serial/CMakeFiles/eigen_serial.dir/householder.cpp.o
+[ 88%] Building CXX object src/serial/CMakeFiles/eigen_serial.dir/qr_eigen.cpp.o
+[100%] Linking CXX executable eigen_serial
+[100%] Built target eigen_serial
+The serial version took 0.00398183s for a matrix of size 16.
+The serial version took 0.041914s for a matrix of size 32.
+The serial version took 0.437767s for a matrix of size 64.
+The serial version took 6.54397s for a matrix of size 128.
+The serial version took 104.739s for a matrix of size 256.
+The serial version took 1629.93s for a matrix of size 512.

@@ -1,0 +1,13 @@
+We seem to be in the right place.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+[ 22%] Built target helpers
+[ 55%] Built target utils
+[100%] Built target eigen_serial
+The serial version took 0.00232291s for a matrix of size 16.
+The serial version took 0.0261009s for a matrix of size 32.
+The serial version took 0.327377s for a matrix of size 64.
+The serial version took 4.45582s for a matrix of size 128.
+The serial version took 75.0681s for a matrix of size 256.
+The serial version took 1422.93s for a matrix of size 512.

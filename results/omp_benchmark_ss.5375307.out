@@ -1,0 +1,15 @@
+We seem to be in the right place.
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/pavanr2/cse402_project/build
+[ 22%] Built target helpers
+[ 55%] Built target utils
+[100%] Built target eigen_omp
+The OpenMP version with 1 threads took 1520.84s for a matrix of size 512.
+The OpenMP version with 2 threads took 687.429s for a matrix of size 512.
+The OpenMP version with 4 threads took 387.765s for a matrix of size 512.
+The OpenMP version with 8 threads took 202.589s for a matrix of size 512.
+The OpenMP version with 16 threads took 130.432s for a matrix of size 512.
+The OpenMP version with 32 threads took 154.286s for a matrix of size 512.
+The OpenMP version with 64 threads took 158.427s for a matrix of size 512.
+The OpenMP version with 20 threads took 178.295s for a matrix of size 512.
