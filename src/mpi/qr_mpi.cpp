@@ -97,12 +97,16 @@ void matmul_mpi(matrix* A, matrix* B, matrix* res){
     int recv_count = send_counts[my_rank];
     int num_rows = rows_proc[my_rank];
 
-    double recvbuf_A[num_rows*matrixSize];
-    double sendbuf_C[num_rows*matrixSize] = {0};
+    std::vector<double> recvbuf_A(num_rows*matrixSize);
+    std::vector<double> sendbuf_C;
+    sendbuf_C.reserve(num_rows*matrixSize);
+
+    //double recvbuf_A[num_rows*matrixSize];
+    //double sendbuf_C[num_rows*matrixSize] = {0};
 
     //std::cout<<"Rank = "<<my_rank<<" Rows = "<<num_rows<<" sendcounts = "<<send_counts[my_rank]<<" disp= "<<displ[my_rank]<<std::endl;
 
-    MPI_Scatterv(A->data, send_counts, displ, MPI_DOUBLE, recvbuf_A, recv_count, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Scatterv(A->data, send_counts, displ, MPI_DOUBLE, &recvbuf_A[0], recv_count, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
     MPI_Bcast(B->data, matrixSize*matrixSize, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
@@ -119,7 +123,7 @@ void matmul_mpi(matrix* A, matrix* B, matrix* res){
         }
     }
 
-    MPI_Gatherv(sendbuf_C, num_rows*matrixSize, MPI_DOUBLE, res->data,send_counts, displ, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Gatherv(&sendbuf_C[0], num_rows*matrixSize, MPI_DOUBLE, res->data,send_counts, displ, MPI_DOUBLE, 0, MPI_COMM_WORLD);
 
     MPI_Barrier(MPI_COMM_WORLD);
 }

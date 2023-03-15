@@ -4,6 +4,7 @@
 #include "../utils/data_structures.hpp"
 #include "../utils/utils.hpp"
 #include "../helpers/helpers.hpp"
+#include <vector>
 #include <mpi.h>
 
 //1D tiled matrix multiplication.
