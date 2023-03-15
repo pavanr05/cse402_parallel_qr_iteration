@@ -1,6 +1,6 @@
-# Numerical methods to find eigenvalues and eigenvectors of square matrices
+# Parallel QR iteration
 
-This objective of the project is to find eigenvalues and eigenvectors of square matrices using iterative numerical methods. OpenMP and MPI will be used to parallelize the operations. The code was run on the Campus Cluster at UIUC.
+This work is part of the course project of the course CSE 402 - Introduction to Parallel Programming at UIUC. The objective of the project is to find eigenvalues and eigenvectors of square matrices using QR iteration method. OpenMP and MPI will be used to parallelize the operations. The code was run on the Campus Cluster at UIUC.
 
 ## Packages needed
 
